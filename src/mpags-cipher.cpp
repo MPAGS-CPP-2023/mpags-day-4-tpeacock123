@@ -3,6 +3,7 @@
 #include "CipherType.hpp"
 #include "ProcessCommandLine.hpp"
 #include "TransformChar.hpp"
+#include "PlayfairCipher.hpp"
 
 #include <cctype>
 #include <fstream>
@@ -101,7 +102,9 @@ int main(int argc, char* argv[])
         case CipherType::Playfair: {
             std::cerr << "[warning] Playfair cipher not yet implemented"
                       << std::endl;
-            outputText = inputText;
+            PlayfairCipher cipher{settings.cipherKey};
+            cipher.setKey(settings.cipherKey);
+            outputText = cipher.applyCipher(inputText, settings.cipherMode);
             break;
         }
     }
